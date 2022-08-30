@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,8 +52,8 @@ public class EmployeeController {
 		return "employeeSavedMsg";
 	}
 	
-	@GetMapping("/updateForm")
-	public String updateForm(@ModelAttribute("employee") Employee employee) {
+	@GetMapping("/updateForm/{id}")
+	public String updateForm(@PathVariable(value = "id") long id, Model model) {
 		return "updateForm";
 	}
 	
@@ -63,9 +64,9 @@ public class EmployeeController {
 		return "employeeSavedMsg";
 	}
 	
-	@DeleteMapping("/delete")
-	public String deleteEmployee(@ModelAttribute("employee") Employee employee) {
-		if(employeeService.deleteEmployee(employee)) {
+	@DeleteMapping("/delete/{id}")
+	public String deleteEmployee(@PathVariable(value = "id")long id) {
+		if(employeeService.deleteEmployeeById(id)) {
 			return "deletedSuccessfully";
 		}else {
 			return "couldNtDelete";
