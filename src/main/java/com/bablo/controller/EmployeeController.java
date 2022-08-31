@@ -3,6 +3,8 @@
  */
 package com.bablo.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +56,11 @@ public class EmployeeController {
 	
 	@GetMapping("/updateForm/{id}")
 	public String updateForm(@PathVariable(value = "id") long id, Model model) {
+		System.out.println("The update form is being called.");
+		Optional<Employee> employeeOpt = employeeService.getEmployeeById(id);
+		if(employeeOpt.isPresent()) {
+		   model.addAttribute("employee", employeeOpt.get());
+		}
 		return "updateForm";
 	}
 	
@@ -64,8 +71,9 @@ public class EmployeeController {
 		return "employeeSavedMsg";
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@GetMapping("/delete/{id}")
 	public String deleteEmployee(@PathVariable(value = "id")long id) {
+		
 		if(employeeService.deleteEmployeeById(id)) {
 			return "deletedSuccessfully";
 		}else {

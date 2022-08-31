@@ -22,8 +22,10 @@ public interface EmployeeService {
     
     boolean deleteEmployee(Employee employee);
     
-    Optional<Employee> getEmployeeById(Employee employee);
-
+    Employee getEmployee(Employee employee);
+    
+    Optional<Employee> getEmployeeById(Long Id);
+    
 	boolean deleteEmployeeById(long id);
 
 }

@@ -63,8 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Optional<Employee> getEmployeeById(Employee employee) {
-		return employeeRepository.findById(employee.getId());
+	public Optional<Employee> getEmployeeById(Long Id) {
+		return employeeRepository.findById(Id);
 	}
 
 	@Override
@@ -74,6 +74,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Employee getEmployee(Employee employee) {
+		return employeeRepository.getById(employee.getId());
 	}
 
 }
